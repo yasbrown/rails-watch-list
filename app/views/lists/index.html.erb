@@ -1,14 +1,31 @@
-<h1>Save any kind of movies</h1>
-
-<div>
-  <h2>My Lists</h2>
-  <ul>
-    <% @lists.each do |list| %>
-      <li><%= link_to list.name, list_path(list) %></li>
-    <% end %>
-  </ul>
+<div class="banner-index" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(data:image/jpeg;base64,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);">
+  <div class="container">
+    <h1><strong>Save any kind of movies</strong></h1>
+  </div>
 </div>
 
-<div>
-  <%= link_to "Add new list", new_list_path %>
+<div class="container">
+  <div class="pt-5 pb-2">
+    <div class="d-flex justify-content-between align-items-center">
+      <div id="index-title">
+        <h2>My Lists</h2>
+      </div>
+
+      <div class="btn">
+        <%= link_to "Create a movie list", new_list_path %>
+      </div>
+    </div>
+
+    <div class="cards d-flex justify-content-around pt-3">
+      <% @lists.each do |list| %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path(list.photo.key, width: 400, height: 300, crop: :fill) %>')">
+          <div class="card-items d-flex flex-column text-center">
+            <p><%= link_to list.name, list_path(list) %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
 </div>

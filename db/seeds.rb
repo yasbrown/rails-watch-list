@@ -21,16 +21,19 @@ movies = JSON.parse(serialized_movies)
 counter = 0
 
 puts "Deleting all Movies"
+Bookmark.destroy_all
 Movie.destroy_all
 
 puts "Creating movies"
 5.times do
   movie = Movie.create(
-    title: movies["results"][counter += 1]["original_title"],
-    overview: movies["results"][counter += 1]["overview"],
-    poster_url: movies["results"][counter += 1]["poster_path"]
+    title: movies["results"][counter]["original_title"],
+    overview: movies["results"][counter]["overview"],
+    rating: movies["results"][counter]["vote_average"],
+    poster_url: movies["results"][counter]["poster_path"],
   )
   puts "Movie with id #{movie.id} has been created"
+  counter += 1
 end
 
 puts "Finished!"

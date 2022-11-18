@@ -1,25 +1,45 @@
-<h1><%= @list.name %></h1>
+<div class="banner-show" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path(@list.photo.key, width: 400, height: 300, crop: :fill) %>');">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
 
-<div>
-  <h2>Bookmarks:</h2>
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)"></div>
+<div class="container">
 
-  <ul>
+  <div class="btn d-flex flex-row-reverse pt-5">
+    <div><%= link_to "Add bookmark", new_list_bookmark_path(@list) %></div>
+  </div>
+
+  <div class="cards d-flex justify-content-around pt-3">
     <% @bookmarks.each do |bookmark| %>
-      <li> <img src=<%="https://image.tmdb.org/t/p/w500#{bookmark.movie.poster_url}"%> ></li>
-      <li><%= bookmark.movie.title %></li>
-      <li><%= bookmark.movie.overview %></li>
-      <li><%= bookmark.comment %></li>
+      <div class="card-trip">
+        <img src=<%="https://image.tmdb.org/t/p/w500#{bookmark.movie.poster_url}"%> >
+        <div class="card-trip-infos">
+          <div>
+            <div class="card-header d-flex flex-row align-items-center p-2">
+              <h2><%= bookmark.movie.title %></h2>
+              <p><%= bookmark.movie.rating %></p>
+              <i class="fa-solid fa-star"></i>
+            </div>
+
+            <div class="px-2 text-justify">
+              <p><%= bookmark.movie.overview %></p>
+            </div>
+            <hr>
+
+            <div class="d-flex justify-content-between align-items-center pt-2 px-2">
+              <div class="d-flex flex-row align-items-center">
+                <i class="fa-solid fa-quote-left" id="icon"></i>
+                <%= bookmark.comment %>
+              </div>
+
+              <div>
+                <%= link_to "delete", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </ul>
-</div>
-
-<img src="" alt="">
-
-<div>
-  <%= link_to "Back to lists", lists_path %>
-</div>
-
-<div>
-  <%= link_to "Add bookmark", new_list_bookmark_path(@list) %>
+  </div>
 </div>
